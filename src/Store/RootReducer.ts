@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import formReducer from "./../Components/Form/ducks/reducer";
+import formReducer from "../Components/Form/ducks/reducer";
 
 const rootReducer = combineReducers({
   formReducer
