@@ -11,3 +11,5 @@ export const setFormFieldState = createAction<SetFormFieldState>(
 );
 
 export const submitFormState = createAction("submit form state");
+
+export const clearFormState = createAction("clear form state");

@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { defaultCountry, FormState } from "../Form";
-import { setFormFieldState, submitFormState } from "./actions";
+import { setFormFieldState, submitFormState, clearFormState } from "./actions";
 import { getFormErrors } from "./reducersHelpers";
 
 const initialState: FormState = {
@@ -31,11 +31,14 @@ export default createReducer(initialState, {
       }
     };
   },
-  [submitFormState.type]: (state) => {
+  [submitFormState.type]: state => {
     const errors: FormState["hasError"] = getFormErrors(state.fields);
     return {
       ...state,
       hasError: errors
     };
+  },
+  [clearFormState.type]: state => {
+    return initialState;
   }
 });

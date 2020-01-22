@@ -11,13 +11,11 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootState } from "../../store/rootReducer";
 import { FormFieldWithTextBelow } from "../FormField";
-import {
-  setFormFieldState,
-  submitFormState
-} from "./ducks/actions";
+import { setFormFieldState, submitFormState, clearFormState } from "./ducks/actions";
 import { fetchCountries } from "./ducks/api";
 import styles from "./styles";
 import { isNumber } from "./utilities";
+import { getFormErrors } from "./ducks/reducersHelpers";
 
 export const defaultCountry = {
   name: "Choose a country"
@@ -32,6 +30,7 @@ interface FormProps {
   formState: FormState;
   setFormFieldState: typeof setFormFieldState;
   submitFormState: typeof submitFormState;
+  clearFormState: typeof clearFormState;
 }
 
 const useTextBelowDefaultStyles = makeStyles(theme => ({
@@ -71,7 +70,8 @@ export const Form: FC<FormProps & WithStyles<typeof styles>> = ({
     hasError
   },
   setFormFieldState,
-  submitFormState
+  submitFormState,
+  clearFormState
 }) => {
   const blackContentOutlinedInputClasses = useOutlinedInputStyles("black")();
   const greyContentOutlinedInputClasses = useOutlinedInputStyles(
@@ -105,6 +105,15 @@ export const Form: FC<FormProps & WithStyles<typeof styles>> = ({
 
   const handleCountrySelect = (e: any) => {
     setFormFieldState({ name: "country", value: e.target.value });
+  };
+
+  const handleSubmitForm = () => {
+    const errors = getFormErrors({ country, ssn, phone, email });
+    const hasError = Object.values(errors).some(Boolean);
+
+    submitFormState();
+
+    if (!hasError) clearFormState();
   };
 
   return (
@@ -174,7 +183,7 @@ export const Form: FC<FormProps & WithStyles<typeof styles>> = ({
         )}
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button variant="contained" onClick={submitFormState}>
+        <Button variant="contained" onClick={handleSubmitForm}>
           <Typography>Submit</Typography>
         </Button>
       </CardActions>
@@ -190,7 +199,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators(
     {
       setFormFieldState,
-      submitFormState
+      submitFormState,
+      clearFormState
     },
     dispatch
   );
