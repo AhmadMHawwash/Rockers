@@ -11,11 +11,11 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootState } from "../../store/rootReducer";
 import { FormFieldWithTextBelow } from "../FormField";
-import { setFormFieldState, submitFormState, clearFormState } from "./ducks/actions";
+import { clearFormState, setFormFieldState, submitFormState } from "./ducks/actions";
 import { fetchCountries } from "./ducks/api";
+import { getFormErrors } from "./ducks/reducersHelpers";
 import styles from "./styles";
 import { isNumber } from "./utilities";
-import { getFormErrors } from "./ducks/reducersHelpers";
 
 export const defaultCountry = {
   name: "Choose a country"
@@ -113,7 +113,10 @@ export const Form: FC<FormProps & WithStyles<typeof styles>> = ({
 
     submitFormState();
 
-    if (!hasError) clearFormState();
+    if (!hasError) {
+      console.log("Success");
+      clearFormState()
+    } 
   };
 
   return (
