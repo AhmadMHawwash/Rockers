@@ -31,7 +31,7 @@ export default createReducer(initialState, {
       }
     };
   },
-  [submitFormState.type]: (state, action) => {
+  [submitFormState.type]: (state) => {
     const errors: FormState["hasError"] = getFormErrors(state.fields);
     return {
       ...state,
