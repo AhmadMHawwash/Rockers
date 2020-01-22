@@ -7,19 +7,6 @@ const styles = (theme: any) =>
       maxWidth: 345,
       marginTop: 20
     },
-    media: {
-      height: 0,
-      paddingTop: "56.25%" // 16:9
-    },
-    avatar: {
-      backgroundColor: red[500]
-    },
-    formControl: {
-      minWidth: 120
-    },
-    focused: {
-      borderBlockColor: "black"
-    },
     cardActions: {
       display: "flex",
       flexDirection: "row",
