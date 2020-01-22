@@ -12,7 +12,6 @@ import { bindActionCreators, Dispatch } from "redux";
 import { RootState } from "../../store/rootReducer";
 import { FormFieldWithTextBelow } from "../FormField";
 import {
-  loadFormData,
   setFormFieldState,
   submitFormState
 } from "./ducks/actions";
@@ -190,7 +189,6 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators(
     {
-      loadFormData,
       setFormFieldState,
       submitFormState
     },
