@@ -14,7 +14,7 @@ import { FormFieldWithTextBelow } from "../FormField";
 import { clearFormState, setFormFieldState, submitFormState } from "./ducks/actions";
 import { fetchCountries } from "./ducks/api";
 import { getFormErrors } from "./ducks/reducersHelpers";
-import styles from "./styles";
+import styles, { useOutlinedInputStyles, useTextBelowDefaultStyles } from "./styles";
 import { isNumber } from "./utilities";
 
 export const defaultCountry = {
@@ -32,34 +32,6 @@ interface FormProps {
   submitFormState: typeof submitFormState;
   clearFormState: typeof clearFormState;
 }
-
-const useTextBelowDefaultStyles = makeStyles(theme => ({
-  typography: {
-    fontSize: 10,
-    marginLeft: 18,
-    color: "red"
-  }
-}));
-
-const useOutlinedInputStyles = (textColor: CSSProperties["color"]) =>
-  makeStyles(theme => ({
-    root: {
-      "& $notchedOutline": {
-        borderColor: "transparent"
-      },
-      "&:hover $notchedOutline": {
-        borderColor: "grey"
-      },
-      "&$focused $notchedOutline": {
-        borderColor: "navyblue"
-      },
-      width: 300,
-      color: textColor,
-      marginTop: 5
-    },
-    focused: {},
-    notchedOutline: {}
-  }));
 
 export type FieldsNames = "email" | "phone" | "ssn" | "country";
 
